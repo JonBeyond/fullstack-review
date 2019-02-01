@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: ['hi']
+      repos: []
     }
     this.search = this.search.bind(this);
   }
