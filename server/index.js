@@ -1,23 +1,44 @@
 const express = require('express');
 let app = express();
 
-app.use(express.static(__dirname + '/../client/dist'));
 
-app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
-});
+var server = {
+  port: 1128,
+  initialize: () => {
+    //initialize the server and router functions here
+    router.serveClient();
+    app.listen(server.port, () => {
+      console.log(`listening on ${server.port}`);
+    })
+  }
+}
 
-app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
-});
+var router = {
+  serveClient: () => {
+    app.use(express.static(__dirname + '/../client/dist'));
+  },
+  queryGithub: () => {
+    //query github
+    app.post('/username', (req, res) => {
+      console.log('query hub not complete');
+      //tbd
+    })
+  },
+  serveClientRepos: () => {
+    app.get('/repos', (req, res) => {
+      console.log('repo server not complete');
 
-let port = 1128;
+      //TODO: serve the files from database
+    })
+  }
+}
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
-});
+var processor = {
+  placeholder: () => {
+    console.log('a null void appears');
+    //TODO: use the server to process the response from github
+    //before storing in mongo
+  }
+}
 
+server.initialize();
