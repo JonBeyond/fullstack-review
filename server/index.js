@@ -1,4 +1,5 @@
 const express = require('express');
+const github = require('../helpers/github');
 let app = express();
 
 
@@ -23,21 +24,20 @@ var router = {
     app.post('/username', (req, res) => {
       req.on('data', (data) => {
         console.log(`Search Term Rcvd: ${JSON.parse(data)}`);
-        processor.state = JSON.parse(data);
+        processor.state.query = JSON.parse(data);
         res.statusCode = 201;
         res.end();
-      })
-
-      //tbd
+        router.queryGithub();
+      });
     })
   },
   queryGithub: () => {
-    console.log('empty');
+    github.getReposByUsername(processor.state.query);
   },
   serveClientRepos: () => {
     app.get('/repos', (req, res) => {
       console.log('repo server not complete');
-      //TODO: serve the files from database
+      //TODO: retrieve and the files from database
     })
   }
 }
@@ -47,11 +47,23 @@ var processor = {
     query: null,
     results: null
   },
-  placeholder: () => {
-    console.log('a null void appears');
-    //TODO: use the server to process the response from github
-    //before storing in mongo
+  handleQueryResults: (data) => {
+    processor.state.results = data.map((repo) => {
+      return {
+        id: repo.id,
+        full_name: repo.full_name,
+        url: repo.html_url,
+        owner_name: repo.owner.login,
+        owner_url: repo.owner.html_url,
+        size: repo.size,
+        createdAt: repo.created_at,
+        updatedAt: repo.updated_at,
+        description: repo.description,
+        forks: repo.forks
+      };
+    });
   }
 }
 
 server.initialize();
+module.exports.handleQueryResults = processor.handleQueryResults;
