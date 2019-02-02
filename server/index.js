@@ -1,6 +1,7 @@
 const express = require('express');
 const github = require('../helpers/github');
 const database = require('../database/index.js');
+const path = require('path');
 let app = express();
 
 
@@ -19,7 +20,7 @@ var server = {
 
 var router = {
   serveClient: () => {
-    app.use(express.static(__dirname + '/../client/dist'));
+    app.use(express.static(path.join(__dirname + '/../client/dist')));
   },
   handleClientSearch: () => {
     app.post('/username', (req, res) => {
