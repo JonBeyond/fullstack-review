@@ -40,6 +40,7 @@ class App extends React.Component {
     })
     req.done((data, textStatus, jqXHR) => {
       console.log(`Server has received the search term (${textStatus})`);
+      this.retrieveRepos();
     })
   }
 
@@ -51,7 +52,6 @@ class App extends React.Component {
     </div>)
   }
   componentDidMount() {
-    console.log('sending repo request');
     this.retrieveRepos();
   }
 }

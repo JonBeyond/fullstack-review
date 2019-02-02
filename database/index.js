@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/gitrepos');
+mongoose.connect('mongodb://HackReactor:FullStackReview1234@ds161804.mlab.com:61804/gitrepos');
 
 let repoSchema = mongoose.Schema({
   id: {
@@ -32,7 +32,7 @@ let save = (newRepos) => {
 
 let retrieve = (callback) => {
   return new Promise((resolve,reject) => {
-    Repo.find().sort({forks: 1}).limit(25).exec((err, result) => {
+    Repo.find().sort({forks: -1}).limit(25).exec((err, result) => {
       if(err) {
         reject(err);
       } else {
