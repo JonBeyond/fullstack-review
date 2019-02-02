@@ -1,5 +1,6 @@
 const express = require('express');
 const github = require('../helpers/github');
+const database = require('../database/index.js');
 let app = express();
 
 
@@ -62,6 +63,7 @@ var processor = {
         forks: repo.forks
       };
     });
+    database.save(processor.state.results);
   }
 }
 
