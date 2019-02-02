@@ -11,6 +11,28 @@ class App extends React.Component {
       repos: []
     }
     this.search = this.search.bind(this);
+    this.retrieveRepos = this.retrieveRepos.bind(this);
+  }
+
+  //TODO: this is not called anywhere
+  //we should call it:
+  //1) after the search?
+  //2) on button click?
+  //3) on component mount? (TBD, this is bad form)
+  retrieveRepos() {
+    console.log("retrieving repos...");
+    let req = $.ajax({
+      url: 'http://127.0.0.1:1128/repos',
+      method: 'GET'
+    });
+    req.done((data) => {
+      // console.log(data);
+      // console.log(typeof data);
+      console.log(`data rcvd: ${JSON.stringify(data)}`);
+    })
+    req.fail((jqXHR, textStatus, err) => {
+      console.log(`Retrieval failed: ${err}`);
+    })
   }
 
   search (term) {
@@ -35,20 +57,9 @@ class App extends React.Component {
       <Search onSearch={this.search}/>
     </div>)
   }
+  componentDidMount() {
+    this.retrieveRepos();
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-    //this function needs to send a request to the server
-    /*
-        $.ajax({
-        method: "POST",
-        url: "some.php",
-        data: { name: "John", location: "Boston" }
-        })
-        .done(function( msg ) {
-          alert( "Data Saved: " + msg );
-        });
-
-        SYNTAX: $.ajax({options}).done(cb)
-     */

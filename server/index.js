@@ -37,11 +37,16 @@ var router = {
   },
   serveClientRepos: () => {
     app.get('/repos', (req, res) => {
-      console.log('repo server not complete');
-      //TODO: retrieve and the files from database
-    })
+      console.log('request for repo received, querying database');
+      database.retrieve().then((result) => {
+        console.log(result);
+        res.send(result);
+        res.end();
+      });
+    });
   }
 }
+
 
 var processor = {
   state: {
