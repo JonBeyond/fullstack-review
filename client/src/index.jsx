@@ -40,7 +40,6 @@ class App extends React.Component {
     })
     req.done((data, textStatus, jqXHR) => {
       console.log(`Server has received the search term (${textStatus})`);
-      //TODO: call the function to show the repos from the database
     })
   }
 

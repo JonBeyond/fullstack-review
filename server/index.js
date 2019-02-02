@@ -51,21 +51,23 @@ var processor = {
     results: null
   },
   handleQueryResults: (data) => {
-    processor.state.results = data.map((repo) => {
-      return {
-        id: repo.id,
-        full_name: repo.full_name,
-        url: repo.html_url,
-        owner_name: repo.owner.login,
-        owner_url: repo.owner.html_url,
-        size: repo.size,
-        createdAt: repo.created_at,
-        updatedAt: repo.updated_at,
-        description: repo.description,
-        forks: repo.forks
-      };
-    });
-    database.save(processor.state.results);
+    if (data.message !== 'Not Found') {
+      processor.state.results = data.map((repo) => {
+        return {
+          id: repo.id,
+          full_name: repo.full_name,
+          url: repo.html_url,
+          owner_name: repo.owner.login,
+          owner_url: repo.owner.html_url,
+          size: repo.size,
+          createdAt: repo.created_at,
+          updatedAt: repo.updated_at,
+          description: repo.description,
+          forks: repo.forks
+        };
+      });
+      database.save(processor.state.results);
+    }
   }
 }
 
