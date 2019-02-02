@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const config = require('../config.js');
-mongoose.connect((process.env.DATABASE_URL || config.DBLINK));
+const config = process.env.DATABASE_URL || require('../config.js').DBLINK;
+mongoose.connect(config);
 
 let repoSchema = mongoose.Schema({
   id: {

@@ -1,5 +1,6 @@
 const request = require('request');
-const config = require('../config.js');
+const config = process.env.GIT_TOKEN || require('../config.js').TOKEN;
+
 const server = require('../server/index.js');
 
 let getReposByUsername = (user) => {
@@ -10,7 +11,7 @@ let getReposByUsername = (user) => {
     url: endpoint,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${process.env.GIT_TOKEN || config.TOKEN}`
+      'Authorization': `token ${config}`
     }
   };
   request.get(options)
