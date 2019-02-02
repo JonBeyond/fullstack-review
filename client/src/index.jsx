@@ -16,7 +16,7 @@ class App extends React.Component {
 
   retrieveRepos() {
     let req = $.ajax({
-      url: 'http://127.0.0.1:1128/repos',
+      url: '/repos',
       method: 'GET'
     });
     req.done((data) => {
@@ -31,7 +31,7 @@ class App extends React.Component {
 
   search (term) {
     let req = $.ajax({ //this request returns a jqXHR obj to req
-      url: 'http://127.0.0.1:1128/username',
+      url: '/username',
       method: 'POST',
       data: JSON.stringify(term)
     });

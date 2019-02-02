@@ -10,7 +10,7 @@ let getReposByUsername = (user) => {
     url: endpoint,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${process.env.GIT_TOKEN || config.TOKEN}`
     }
   };
   request.get(options)

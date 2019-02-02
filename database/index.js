@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://HackReactor:FullStackReview1234@ds161804.mlab.com:61804/gitrepos');
+const config = require('../config.js');
+mongoose.connect((process.env.DATABASE_URL || config.DBLINK));
 
 let repoSchema = mongoose.Schema({
   id: {
