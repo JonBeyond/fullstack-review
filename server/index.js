@@ -24,7 +24,6 @@ var router = {
   handleClientSearch: () => {
     app.post('/username', (req, res) => {
       req.on('data', (data) => {
-        console.log(`Search Term Rcvd: ${JSON.parse(data)}`);
         processor.state.query = JSON.parse(data);
         res.statusCode = 201;
         res.end();
@@ -37,9 +36,7 @@ var router = {
   },
   serveClientRepos: () => {
     app.get('/repos', (req, res) => {
-      console.log('request for repo received, querying database');
       database.retrieve().then((result) => {
-        console.log(result);
         res.send(result);
         res.end();
       });

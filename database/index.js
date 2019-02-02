@@ -42,5 +42,9 @@ let retrieve = (callback) => {
   });
 }
 
+let purge= () => {
+  //delete all items in the database?
+}
+
 module.exports.save = save;
 module.exports.retrieve = retrieve;
