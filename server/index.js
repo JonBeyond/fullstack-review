@@ -6,7 +6,7 @@ let app = express();
 
 
 var server = {
-  port: process.env.port || 1128,
+  port: process.env.PORT || 1128,
   initialize: () => {
     //initialize the server and router functions here
     router.serveClient();
