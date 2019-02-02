@@ -32,7 +32,7 @@ let save = (newRepos) => {
 
 let retrieve = (callback) => {
   return new Promise((resolve,reject) => {
-    Repo.find((err, result) => {
+    Repo.find().sort({forks: 1}).limit(25).exec((err, result) => {
       if(err) {
         reject(err);
       } else {
@@ -41,6 +41,7 @@ let retrieve = (callback) => {
     });
   });
 }
+
 
 let purge= () => {
   //delete all items in the database?

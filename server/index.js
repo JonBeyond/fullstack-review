@@ -36,6 +36,7 @@ var router = {
   },
   serveClientRepos: () => {
     app.get('/repos', (req, res) => {
+      console.log('req rcvd for repos')
       database.retrieve().then((result) => {
         res.send(result);
         res.end();

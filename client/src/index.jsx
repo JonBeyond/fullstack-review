@@ -51,6 +51,7 @@ class App extends React.Component {
     </div>)
   }
   componentDidMount() {
+    console.log('sending repo request');
     this.retrieveRepos();
   }
 }
